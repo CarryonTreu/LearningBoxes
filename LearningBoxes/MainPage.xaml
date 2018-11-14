@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="LearningBoxes.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LearningBoxes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <NavigationView x:Name="nvSample"
+                    IsBackButtonVisible="Collapsed"
+                    ItemInvoked="OnNavigationViewItemInvoked">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="DockBottom"   Content="Boxes"     Tag="Boxes" />
+                <NavigationViewItem Icon="Page2"        Content="Cards"     Tag="Cards" />
+                <NavigationViewItem Icon="Download"     Content="Import"    Tag="Import" />
+                <NavigationViewItem Icon="Upload"       Content="Export"    Tag="Export" />
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="contentFrame">
+
+                <Grid Background="DarkGray">
+                    <!--Image Source="Assets\StoreLogo.png" /-->
+                    <StackPanel Background="Black" VerticalAlignment="Top" Height="40px" Orientation="Horizontal" >
+                        <Button Content="Save"  Click="btnSave_Click"   />
+                        <Button Content="Load"  Click="btnLoad_Click"   />
+                        <Button Content="Clear" Click="btnClear_Click"  />
+                    </StackPanel>
+                    <Canvas Background="Bisque" Width="400px" Height="250px" >
+                        <InkCanvas x:Name="inkCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250px" Width="400px"/>
+                    </Canvas>
+                    <InkToolbar TargetInkCanvas="{x:Bind inkCanvas}" VerticalAlignment="Top" Margin="0,40,0,0"/>
+                </Grid>
+            </Frame>
+
+        </NavigationView>
+    </Grid>
+</Page>
