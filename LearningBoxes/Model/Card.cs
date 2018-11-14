@@ -6,35 +6,37 @@ using System.Threading.Tasks;
 
 namespace LearningBoxes.Model {
     class Card {
-
         private DateTime creationDate;
         private DateTime lastEditDate;
+        private DateTime lastTestedDate;
 
-        private string cardName;
-        private int    cardId;
-        private string cardQuestion;
-        private string cardAwnser;
+        private string name;
+        private int    id;
+        private string frontInk;
+        private string backInk;
+
+        private int blockid;
 
         public Card(string cardName = "",
                     string cardQuestion = "",
                     string cardAwnser = "") {
             //TODO generate new id
-            this.cardId = 0;
+            this.id = 0;
 
-            this.cardName = cardName;
-            this.cardQuestion = cardQuestion;
-            this.cardAwnser = cardAwnser;
+            this.name = cardName;
+            this.frontInk = cardQuestion;
+            this.backInk = cardAwnser;
             DateTime current = new DateTime();
             this.creationDate = current;
             this.lastEditDate = current;
         }
 
         public void setCardName(string value) {
-            this.cardName = value;
+            this.name = value;
             this.lastEditDate = new DateTime();
         }
         public string getCardName() {
-            return this.cardName;
+            return this.name;
         }
     }
 }

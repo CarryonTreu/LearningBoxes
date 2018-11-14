@@ -100,6 +100,7 @@
     </Compile>
     <Compile Include="Model\Box.cs" />
     <Compile Include="Model\Card.cs" />
+    <Compile Include="Model\Deck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
