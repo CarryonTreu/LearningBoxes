@@ -13,7 +13,7 @@ using Windows.Storage.Streams;
 namespace LearningBoxes.Helper {
     public class DeckHelper {
 
-        public static void createDeck(string inputName = "") {
+        public static void CreateDeck(string inputName = "") {
             Deck newDeck = new Deck();
 
             //Id
@@ -37,8 +37,11 @@ namespace LearningBoxes.Helper {
             newDeck.creationDate = now;
             newDeck.lastEditDate = now;
 
+            //Boxes
+            newDeck.boxes = BoxHelper.CreateBoxes();
+
             //create File
-            ModelHelper.createFile(deckName, newDeck);
+            ModelHelper.CreateFile(deckName, newDeck);
         }
 
     }

@@ -98,6 +98,7 @@
     <Compile Include="Decks.xaml.cs">
       <DependentUpon>Decks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helper\BoxHelper.cs" />
     <Compile Include="Helper\DeckHelper.cs" />
     <Compile Include="Helper\ModelHelper.cs" />
     <Compile Include="MainPage.xaml.cs">

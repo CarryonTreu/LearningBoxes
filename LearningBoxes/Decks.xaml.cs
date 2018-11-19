@@ -45,7 +45,7 @@ namespace LearningBoxes {
 
             string deckName = this.DeckName.Text;
             // TODO add color
-            DeckHelper.createDeck(deckName);
+            DeckHelper.CreateDeck(deckName);
             this.DeckName.Text = "";
             this.SaveInfoText.Foreground = new SolidColorBrush(Colors.ForestGreen);
             this.SaveInfoText.Text = deckName + " was created successfully!";

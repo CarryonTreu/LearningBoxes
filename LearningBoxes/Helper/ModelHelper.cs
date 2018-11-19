@@ -11,7 +11,7 @@ using Windows.Storage.Streams;
 namespace LearningBoxes.Helper {
     class ModelHelper {
 
-        public async static void createFile(string fileName, object objectToStore) {
+        public async static void CreateFile(string fileName, object objectToStore) {
             //Create XML
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             //TODO dont ReplaceExisting but fail and return false
