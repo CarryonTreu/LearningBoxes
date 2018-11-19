@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Diagnostics;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Windows.UI.Input.Inking;
 using Windows.Storage.Streams;
-using LearningBoxes.Model;
 
 namespace LearningBoxes {
     /// <summary>
@@ -29,15 +20,28 @@ namespace LearningBoxes {
                 Windows.UI.Core.CoreInputDeviceTypes.Mouse |
                 Windows.UI.Core.CoreInputDeviceTypes.Pen;
         }
-
+        
         private void OnNavigationViewItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args) {
             if (args.IsSettingsInvoked) {
                 Debug.WriteLine("Settings invoked");
             } else {
                 var invokedItem = args.InvokedItem;
-
-                Debug.WriteLine("Invoked:" + invokedItem.ToString());
+                //Debug.WriteLine("Invoked:" + invokedItem.ToString());
+                switch (invokedItem) {
+                    case "Decks":
+                        HandleDecksInvoked();
+                        break;
+                    default:
+                        //TODO
+                        break;
+                }
+                  
             }
+        }
+
+        private void HandleDecksInvoked() {
+            this.contentFrame.Content = new Decks();
+
         }
 
         /// <summary>

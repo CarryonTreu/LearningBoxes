@@ -8,21 +8,19 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Name="rootGrid">
         <NavigationView x:Name="nvSample"
                     IsBackButtonVisible="Collapsed"
                     ItemInvoked="OnNavigationViewItemInvoked">
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="DockBottom"   Content="Boxes"     Tag="Boxes" />
+                <NavigationViewItem Icon="DockBottom"   Content="Decks"     Tag="Decks"  Name="navSideDecks" />
                 <NavigationViewItem Icon="Page2"        Content="Cards"     Tag="Cards" />
-                <NavigationViewItem Icon="Download"     Content="Import"    Tag="Import" />
-                <NavigationViewItem Icon="Upload"       Content="Export"    Tag="Export" />
+                <NavigationViewItem Icon="Download"     Content="Import"    Tag="Import"/>
+                <NavigationViewItem Icon="Upload"       Content="Export"    Tag="Export"/>
             </NavigationView.MenuItems>
 
             <Frame x:Name="contentFrame">
-
-                <Grid Background="DarkGray">
-                    <!--Image Source="Assets\StoreLogo.png" /-->
+                <Grid Background="Gray">
                     <StackPanel Background="Black" VerticalAlignment="Top" Height="40px" Orientation="Horizontal" >
                         <Button Content="Save"  Click="btnSave_Click"   />
                         <Button Content="Load"  Click="btnLoad_Click"   />
