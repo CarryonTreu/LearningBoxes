@@ -95,10 +95,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cards.xaml.cs">
+      <DependentUpon>Cards.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Decks.xaml.cs">
       <DependentUpon>Decks.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\BoxHelper.cs" />
+    <Compile Include="Helper\CardHelper.cs" />
+    <Compile Include="Helper\Constants.cs" />
     <Compile Include="Helper\DeckHelper.cs" />
     <Compile Include="Helper\ModelHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -130,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Cards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Decks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

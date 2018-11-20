@@ -20,17 +20,6 @@
             </NavigationView.MenuItems>
 
             <Frame x:Name="contentFrame">
-                <Grid Background="Gray">
-                    <StackPanel Background="Black" VerticalAlignment="Top" Height="40px" Orientation="Horizontal" >
-                        <Button Content="Save"  Click="btnSave_Click"   />
-                        <Button Content="Load"  Click="btnLoad_Click"   />
-                        <Button Content="Clear" Click="btnClear_Click"  />
-                    </StackPanel>
-                    <Canvas Background="Bisque" Width="400px" Height="250px" >
-                        <InkCanvas x:Name="inkCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250px" Width="400px"/>
-                    </Canvas>
-                    <InkToolbar TargetInkCanvas="{x:Bind inkCanvas}" VerticalAlignment="Top" Margin="0,40,0,0"/>
-                </Grid>
             </Frame>
 
         </NavigationView>

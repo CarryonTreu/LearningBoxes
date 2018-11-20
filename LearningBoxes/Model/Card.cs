@@ -9,15 +9,15 @@ using System.IO;
 
 namespace LearningBoxes.Model {
     public class Card {
-        protected DateTime creationDate;
-        protected DateTime lastEditDate;
-        protected DateTime lastTestedDate;
+        public DateTime creationDate { get; set; }
+        public DateTime lastEditDate { get; set; }
+        public DateTime lastTestedDate { get; set; }
 
-        protected string name;
-        protected int id;
-        protected string frontInk;
-        protected string backInk;
+        public string name { get; set; }
+        public int id { get; set; }
+        public string frontInk { get; set; }
+        public string backInk { get; set; }
 
-        protected int blockId;
+        public int blockId { get; set; }
     }
 }

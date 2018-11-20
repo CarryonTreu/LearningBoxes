@@ -7,13 +7,13 @@ using System.Diagnostics;
 
 namespace LearningBoxes.Model {
     public class Box {
-        public DateTime creationDate;
-        public DateTime lastEditDate;
+        public DateTime creationDate { get; set; }
+        public DateTime lastEditDate { get; set; }
 
-        public int id;
-        public int daysBetweenTest;
+        public int id { get; set; }
+        public int daysBetweenTest { get; set; }
 
-        public int cardCount = 0;
-        public Card[] cards = null;
+        public int cardCount { get; set; }
+        public List<Card> cards { get; set; }
     }
 }

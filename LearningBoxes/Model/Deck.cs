@@ -11,14 +11,15 @@ using Windows.Storage;
 namespace LearningBoxes.Model {
     [XmlRootAttribute("Deck", Namespace = "LearningBoxes.Model", IsNullable = false)]
     public class Deck {
-        public int id;
-        public string name;
+        public int id { get; set; }
+        public string name { get; set; }
 
-        public DateTime creationDate;
-        public DateTime lastEditDate;
+        public DateTime creationDate { get; set; }
+        public DateTime lastEditDate { get; set; }
 
-        public int cardCount = 0;
+        public int latestCardId { get; set; }
+        public int cardCount { get; set; }
 
-        public Box[] boxes;
+        public Box[] boxes{ get; set; }
     }
 }

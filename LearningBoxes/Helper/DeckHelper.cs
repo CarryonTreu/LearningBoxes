@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -18,9 +19,9 @@ namespace LearningBoxes.Helper {
 
             //Id
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            int currentDeckId = (int)localSettings.Values["currentDeckId"];
+            int currentDeckId = (int)localSettings.Values[Constants.currentDeckId];
             currentDeckId++;
-            localSettings.Values["currentDeckId"] = currentDeckId;
+            localSettings.Values[Constants.currentDeckId] = currentDeckId;
             newDeck.id = currentDeckId;
 
             //Name
@@ -41,8 +42,28 @@ namespace LearningBoxes.Helper {
             newDeck.boxes = BoxHelper.CreateBoxes();
 
             //create File
-            ModelHelper.CreateFile(deckName, newDeck);
-        }
+            ModelHelper.SaveFile(deckName, newDeck);
 
+            //change active deck to the new
+            localSettings.Values[Constants.activeDeck] = deckName;
+        }
+        
+
+        public static Deck loadDeckObjectFromXML(string filepath) {
+            //Deck tmpDeck = new Deck();
+            //XmlSerializer serializer = new XmlSerializer(typeof(Deck));
+            //using (Stream reader = new FileStream(filepath, FileMode.Open)) {
+            //    tmpDeck = (Deck)serializer.Deserialize(reader);
+            //}
+            //return tmpDeck;
+
+            // Now we can read the serialized book ...  
+            XmlSerializer reader = new XmlSerializer(typeof(Deck));
+            StreamReader file = new StreamReader(filepath);
+            Deck tmpDeck = (Deck)reader.Deserialize(file);
+            file.Close();
+
+            return tmpDeck;
+        }
     }
 }
