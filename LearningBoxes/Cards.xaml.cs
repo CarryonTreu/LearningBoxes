@@ -24,6 +24,7 @@ namespace LearningBoxes {
     public sealed partial class Cards : UserControl {
 
         string activeDeckName = (string)ApplicationData.Current.LocalSettings.Values[Constants.activeDeck];
+        string toggleButtonText = Constants.goToCardBack;
 
         public Cards() {
             this.InitializeComponent();
@@ -35,6 +36,10 @@ namespace LearningBoxes {
             inkCanvas.InkPresenter.InputDeviceTypes =
                 Windows.UI.Core.CoreInputDeviceTypes.Mouse |
                 Windows.UI.Core.CoreInputDeviceTypes.Pen;
+        }
+
+        private void toggleBtn_Click(object sender, RoutedEvent e) {
+
         }
 
         /// <summary>
@@ -74,18 +79,14 @@ namespace LearningBoxes {
             }
         }
 
-        /// <summary>
-        /// Get ink data from ink canvas, serialize it, and save it to a file.
-        /// </summary>
-        private async void btnSave_Click(object sender, RoutedEventArgs e) {
+        private async void SaveInkToGif() {
             // Get all strokes on the InkCanvas
             IReadOnlyList<InkStroke> currentStrokes = inkCanvas.InkPresenter.StrokeContainer.GetStrokes();
 
-            // Strokes present on ink canvas
+            //save to gif
             if (currentStrokes.Count > 0) {
                 StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-                StorageFile file = await localFolder.CreateFileAsync($@"{DateTime.Now.Ticks}.gif");
-                Debug.WriteLine(file.Path);
+                StorageFile file = await localFolder.CreateFileAsync($@"{DateTime.Now.Ticks}.gif",CreationCollisionOption.GenerateUniqueName);
                 if (file != null) {
                     CachedFileManager.DeferUpdates(file);
                     IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.ReadWrite);
@@ -98,14 +99,48 @@ namespace LearningBoxes {
                     FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
 
                     if (status == FileUpdateStatus.Complete) {
-                        // gif saved -> add card to deck
-                        string filePath = localFolder.Path + "\\" + activeDeckName + ".xml";
+                        // gif saved
+                    } else {
+                        // File couldn't be saved.
+                        // TODO give warning
+                    }
+                } else {
+                    // Operation cancelled.
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get ink data from ink canvas, serialize it, and save it to a file.
+        /// </summary>
+        private async void btnSave_Click(object sender, RoutedEventArgs e) {
+            // Get all strokes on the InkCanvas
+            IReadOnlyList<InkStroke> currentStrokes = inkCanvas.InkPresenter.StrokeContainer.GetStrokes();
+
+            //save to gif
+            if (currentStrokes.Count > 0) {
+                StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+                StorageFile file = await localFolder.CreateFileAsync($@"{DateTime.Now.Ticks}.gif", CreationCollisionOption.GenerateUniqueName);
+                if (file != null) {
+                    CachedFileManager.DeferUpdates(file);
+                    IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.ReadWrite);
+
+                    using (IOutputStream outputStream = stream.GetOutputStreamAt(0)) {
+                        await inkCanvas.InkPresenter.StrokeContainer.SaveAsync(outputStream);
+                        await outputStream.FlushAsync();
+                    }
+                    stream.Dispose();
+                    FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
+
+                    if (status == FileUpdateStatus.Complete) {
+                        // gif saved -> add card to active deck
+                        string filePath = localFolder.Path + @"\" + activeDeckName + ".xml";
                         string gifPath = file.Path;
                         Deck activeDeck = DeckHelper.loadDeckObjectFromXML(filePath);
                         Card newCard = CardHelper.CreateCard(++activeDeck.latestCardId, gifPath);
 
                         activeDeck.boxes[0].cards.Add(newCard);
-                        ModelHelper.SaveFile(activeDeckName,activeDeck);
+                        ModelHelper.SaveFile(activeDeckName, activeDeck);
 
                     } else {
                         // File couldn't be saved.
@@ -115,10 +150,6 @@ namespace LearningBoxes {
                     // Operation cancelled.
                 }
             }
-
-        }
-
-        public void AddNewCardToDeck() {
 
         }
     }
