@@ -9,7 +9,7 @@ using Windows.Storage;
 namespace LearningBoxes.Helper {
     class CardHelper {
 
-        public static Card CreateCard(int cardId, string gifPath, string cardName = "") {
+        public static Card CreateCard(int cardId, string cardName = "") {
             Card tmpCard = new Card();
 
             tmpCard.id = cardId;
@@ -20,8 +20,9 @@ namespace LearningBoxes.Helper {
             tmpCard.lastEditDate = now;
 
             //TODO handle question and awnser
-            tmpCard.frontInk = gifPath;
-            tmpCard.backInk = gifPath;
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            tmpCard.frontInk = (string)localSettings.Values[Constants.tmpInkFrontFileName];
+            tmpCard.backInk = (string)localSettings.Values[Constants.tmpInkBackFileName];
             return tmpCard;
         }
     }

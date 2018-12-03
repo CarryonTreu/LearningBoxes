@@ -11,11 +11,13 @@ namespace LearningBoxes.Helper {
         //local:
         public const string activeDeck = "activeDeck";
         public const string currentDeckId = "currentDeckId";
+        public const string tmpInkFrontFileName = "tmpInkFrontFileName";
+        public const string tmpInkBackFileName = "tmpInkBackFileName";
         //roaming:
 
         /************* Texts *************/
         //Cards:
-        public const string goToCardFront = "Work on backside";
-        public const string goToCardBack = "Work on frontside";
+        public const string goToCardFront = "Work on frontside";
+        public const string goToCardBack = "Work on backside";
     }
 }
